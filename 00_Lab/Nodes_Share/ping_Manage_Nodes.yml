@@ -1,0 +1,11 @@
+---
+- hosts: Manage_Nodes
+  gather_facts: yes
+  vars:
+    users:
+    - helphy
+    - ansible
+    - root
+  tasks:
+  - name: "Ping ?"
+    ping:

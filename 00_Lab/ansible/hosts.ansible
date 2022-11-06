@@ -1,0 +1,13 @@
+[Control_Nodes]
+Control_Node
+[Manage_Nodes]
+Manage_Node_0
+Manage_Node_1
+Manage_Node_2
+[all:vars]
+ansible_connection=ssh
+ansible_user=ansible
+ansible_become=yes
+ansible_become_user=root
+ansible_become_method=sudo
+

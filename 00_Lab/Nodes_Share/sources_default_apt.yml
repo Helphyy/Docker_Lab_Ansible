@@ -1,0 +1,118 @@
+---
+- hosts: Manage_Nodes
+  tasks:
+  
+    - name: Install python3-apt
+      apt:
+        name: python3-apt
+        update_cache: yes
+
+    - name: Install software prop
+      apt:
+        name: software-properties-common
+        update_cache: yes
+
+#Debian Buster, dépôt principal + paquets non libres
+
+    - ansible.builtin.apt_repository:
+        repo: deb-src http://deb.debian.org/debian/ buster main contrib non-free
+        update_cache: yes
+
+    - ansible.builtin.apt_repository:
+        repo: deb http://deb.debian.org/debian/ buster main contrib non-free
+        update_cache: yes
+
+# Debian Buster, mises à jour de sécurité + paquets non libres
+
+    - ansible.builtin.apt_repository:
+        repo: deb http://deb.debian.org/debian-security/ buster/updates main contrib non-free
+        update_cache: yes
+
+    - ansible.builtin.apt_repository:
+        repo: deb-src http://deb.debian.org/debian-security/ buster/updates main contrib non-free
+        update_cache: yes
+
+# Debian Buster, mises à jour "volatiles" + paquets non libres
+
+    - ansible.builtin.apt_repository:
+        repo: deb http://deb.debian.org/debian/ buster-updates main contrib non-free
+        update_cache: yes
+
+    - ansible.builtin.apt_repository:
+        repo: deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free
+        update_cache: yes
+
+    - name: apt install vim
+      apt:
+        name: vim
+        update_cache: yes
+
+    - name: apt install htop
+      apt:
+        name: htop
+        update_cache: yes
+
+    - name: apt install tree
+      apt:
+        name: tree
+        update_cache: yes
+
+    - name: apt install tcpdump
+      apt:
+        name: tcpdump
+        update_cache: yes
+
+    - name: apt install mtr
+      apt:
+        name: mtr
+        update_cache: yes
+
+    - name: apt install git
+      apt:
+        name: git
+        update_cache: yes
+
+    - name: apt install rsync
+      apt:
+        name: rsync
+        update_cache: yes
+        
+    - name: apt install curl
+      apt:
+        name: curl
+        update_cache: yes
+
+    - name: apt install screen
+      apt:
+        name: screen
+        update_cache: yes
+
+    - name: apt install lsof
+      apt:
+        name: lsof
+        update_cache: yes
+
+    - name: apt install atop
+      apt:
+        name: atop 
+        update_cache: yes
+
+    - name: apt install qemu-guest-agent
+      apt:
+        name: qemu-guest-agent
+        update_cache: yes
+
+    - name: apt install sudo
+      apt:
+        name: sudo
+        update_cache: yes
+
+    - name: apt install sysstat
+      apt:
+        name: sysstat 
+        update_cache: yes
+        
+    - name: apt install minicom
+      apt:
+        name: minicom
+        update_cache: yes

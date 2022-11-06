@@ -1,0 +1,29 @@
+---
+- hosts: Manage_Nodes
+
+  vars_prompt:
+    - name: username
+      prompt: "Quel est le nom de l'utilisateur à ajouter"
+    - name: group
+      prompt: "Quel est le nom du group dans le quel vous voulez ajouter l'utilisateur (compta, production)"
+
+  tasks:
+    - name: groupe compta 
+      ansible.builtin.group:
+        name: compta
+        state: present
+        gid: 2000
+  
+    - name: groupe production
+      ansible.builtin.group: 
+        name: production 
+        state: present
+        gid: 3000
+
+    - name: add user to group
+      anisble.builtin.user:
+        name: "{{ username }}"
+        group: "{{ group }}"
+        state: present
+        append: yes
+        

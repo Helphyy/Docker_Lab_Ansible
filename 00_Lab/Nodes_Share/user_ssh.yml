@@ -1,0 +1,36 @@
+- name: Create New User
+  hosts: all
+  become: true
+  gather_facts: false
+
+  vars_prompt:
+    - name: username
+      prompt: "quel est le nom de l'utilisateur"
+    - name: userpass
+      prompt: "quel est le mdp"
+
+  tasks:
+    - name: Create User
+      ansible.builtin.user:
+        name: "{{ username }}"
+        state: present
+        shell: /bin/bash
+        password: "{{ userpass | password_hash('sha512') }}"
+        update_password: on_create
+        append: yes
+
+    - name: Sudo install
+      apt:
+        name: sudo
+        update_cache: yes
+
+    - name: Deploy SSH Public Key
+      ansible.posix.authorized_key:
+        user: "{{ username }}"
+        state: present
+        key: "{{ lookup('file', '/root/Nodes_Share/SSH_Key/id_ecdsa_test.pub/') }}"
+
+    - name: add ansible user to sudoers
+      copy:
+        dest: /etc/sudoers.d/{{ username }}
+        content: "{{ username }}  ALL=(ALL) PASSWD:ALL"
